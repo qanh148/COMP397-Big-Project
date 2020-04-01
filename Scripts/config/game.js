@@ -7,7 +7,7 @@ var config;
         Game.SCREEN_WIDTH = 640;
         Game.SCREEN_HEIGHT = 480;
         Game.FPS = 60; // 60 Frames per second
-        Game.CLOUD_NUM = 4;
+        Game.CLOUD_NUM = 2;
         Game.LIVES = 5;
         Game.SCORE = 0;
         Game.HIGH_SCORE = 0;

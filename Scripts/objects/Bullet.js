@@ -26,11 +26,7 @@ var objects;
         // PRIVATE METHODS
         Bullet.prototype._checkBounds = function () {
             // check upper bounds
-            if (this.position.y <= -this.height) {
-                this.Reset();
-            }
-            // check lower bounds
-            if (this.position.y >= config.Game.SCREEN_HEIGHT + this.height) {
+            if (this.position.x <= this.halfWidth || this.position.x >= config.Game.SCREEN_WIDTH - this.halfWidth || this.position.y <= this.halfHeight || this.position.y >= config.Game.SCREEN_HEIGHT - this.halfHeight) {
                 this.Reset();
             }
         };
@@ -40,8 +36,6 @@ var objects;
         // PUBLIC METHODS
         Bullet.prototype.Start = function () {
             this.type = enums.GameObjectType.BULLET;
-            this._verticalSpeed = 5; // 5 px per frame
-            this.velocity = new objects.Vector2(0, -this._verticalSpeed);
             this.Reset();
         };
         Bullet.prototype.Update = function () {

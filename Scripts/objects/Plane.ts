@@ -17,7 +17,7 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "plane", 0, 0, true);
+            super(config.Game.TEXTURE_ATLAS, "agent", 0, 0, true);
 
             this.Start();
         }
@@ -38,13 +38,13 @@ module objects
                 this.position = new Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, this.position.y);
             }
 
-            // left boundary
+            // down boundary
             if(this.position.y <= this.halfHeight)
             {
                 this.position = new Vector2(this.position.x, this.halfHeight);
             }
 
-            // right boundary
+            // top boundary
 
             if(this.position.y >= config.Game.SCREEN_HEIGHT - this.halfHeight)
             {
@@ -88,6 +88,8 @@ module objects
                 
             }
             this.position = new Vector2(this.position.x, this.position.y);
+            this.rotation = Math.atan2(this.stage.mouseX- this.position.x,- (this.stage.mouseY- this.position.y) )*(180/Math.PI);
+            this._bulletSpawn =this.position;
         }
         
         // PUBLIC METHODS
@@ -98,7 +100,7 @@ module objects
             this._engineSound = createjs.Sound.play("engine");
             this._engineSound.loop = -1; // loop forever
             this._engineSound.volume = 0.1; // 10% volume
-            this._horizontalSpeed = 10;
+            this.rotation = 0;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, config.Game.SCREEN_HEIGHT * 0.5);
         }
 
@@ -127,6 +129,10 @@ module objects
         {
             let bullet = config.Game.BULLET_MANAGER.GetBullet();
             bullet.position = this._bulletSpawn;
+            let dir = Math.atan2(this.stage.mouseY-this.position.y,this.stage.mouseX-this.position.x);
+            this._horizontalSpeed = Math.cos(dir) * 10;
+            this._verticalSpeed = Math.sin(dir) *10;
+            bullet.velocity = new Vector2(this._horizontalSpeed, this._verticalSpeed);
         }
 
         

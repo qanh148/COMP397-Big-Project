@@ -4,8 +4,9 @@ module managers
     {
         // PRIVATE INSTANCE MEMBERS
         private _bulletNumber: number;
-        private _bulletPool: Array<objects.Bullet>;
-
+        public _bulletPool: Array<objects.Bullet>;
+        public static firingBullet:Array<objects.Bullet>;
+        
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
@@ -46,10 +47,9 @@ module managers
             let bullet = this._bulletPool.shift();
 
             bullet.isActive = true;
-
+            
             // push the bullet to the back of the pool
             this._bulletPool.push(bullet);
-
             // return a reference to the active bullet
             return bullet;
         }
@@ -59,6 +59,7 @@ module managers
             this._bulletPool.forEach(bullet => {
                 bullet.Update();
             });
+            Bullet.firingBullet= this._bulletPool;
         }
     }
 }

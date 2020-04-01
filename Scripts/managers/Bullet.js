@@ -37,6 +37,7 @@ var managers;
             this._bulletPool.forEach(function (bullet) {
                 bullet.Update();
             });
+            Bullet.firingBullet = this._bulletPool;
         };
         return Bullet;
     }());

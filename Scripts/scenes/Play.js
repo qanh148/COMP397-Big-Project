@@ -42,6 +42,7 @@ var scenes;
             config.Game.BULLET_MANAGER = this._bulletManager;
             this._keyboardManager = new managers.Keyboard();
             config.Game.KEYBOARD_MANAGER = this._keyboardManager;
+            this._bullet = this._bulletManager.GetBullet();
             this.Main();
         };
         Play.prototype.Update = function () {
@@ -50,11 +51,40 @@ var scenes;
             this._plane.Update();
             this._bulletManager.Update();
             this._island.Update();
-            managers.Collision.AABBCheck(this._plane, this._island);
+            if (managers.Collision.squaredRadiusCheck(this._plane, this._island)) {
+                console.log("Collision with Island!");
+                var yaySound = createjs.Sound.play("yay");
+                yaySound.volume = 0.2;
+                config.Game.SCORE_BOARD.Score += 100;
+                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                }
+            }
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
-                managers.Collision.squaredRadiusCheck(_this._plane, cloud);
+                if (managers.Collision.squaredRadiusCheck(_this._plane, cloud)) {
+                    console.log("Collision with Cloud!");
+                    var thunderSound = createjs.Sound.play("thunder");
+                    thunderSound.volume = 0.2;
+                    config.Game.SCORE_BOARD.Lives -= 1;
+                    // check if lives falls less than 1 and then switch to END scene
+                    if (config.Game.LIVES < 1) {
+                        config.Game.SCENE = scenes.State.END;
+                    }
+                }
             });
+            var bullet;
+            for (var _i = 0, _a = managers.Bullet.firingBullet; _i < _a.length; _i++) {
+                bullet = _a[_i];
+                this._clouds.forEach(function (cloud) {
+                    if (managers.Collision.squaredRadiusCheck(cloud, bullet)) {
+                        console.log("Bullet Collision with Cloud!");
+                        config.Game.SCORE_BOARD.Score += 20;
+                        bullet.Reset();
+                        cloud.Reset();
+                    }
+                });
+            }
         };
         Play.prototype.Main = function () {
             this.addChild(this._ocean);

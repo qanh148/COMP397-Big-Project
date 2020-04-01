@@ -11,7 +11,7 @@ var Game = (function () {
     var textureAtlas;
     var oceanAtlas;
     var assetManifest = [
-        { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "ocean", src: "./Assets/images/road.png" },
         { id: "atlas", src: "./Assets/sprites/atlas.png" },
         { id: "engine", src: "./Assets/audio/engine.ogg" },
         { id: "yay", src: "./Assets/audio/yay.ogg" },
@@ -20,35 +20,42 @@ var Game = (function () {
     var spriteData = {
         "images": {},
         "frames": [
-            [1, 1, 16, 16, 0, 0, 0],
-            [19, 1, 150, 50, 0, 0, 0],
-            [1, 53, 226, 178, 0, 0, 0],
-            [229, 53, 62, 63, 0, 0, 0],
-            [1, 233, 65, 65, 0, 0, 0],
-            [68, 233, 65, 65, 0, 0, 0],
-            [135, 233, 65, 65, 0, 0, 0],
-            [202, 233, 65, 65, 0, 0, 0],
-            [1, 300, 150, 50, 0, 0, 0],
-            [153, 300, 150, 50, 0, 0, 0]
+            [1, 1, 226, 178, 0, 0, 0],
+            [1, 181, 150, 50, 0, 0, 0],
+            [153, 181, 150, 50, 0, 0, 0],
+            [229, 1, 65, 65, 0, 0, 0],
+            [229, 68, 65, 65, 0, 0, 0],
+            [229, 135, 16, 16, 0, 0, 0],
+            [296, 1, 60, 60, 0, 0, 0],
+            [296, 63, 60, 60, 0, 0, 0],
+            [1, 233, 150, 50, 0, 0, 0],
+            [153, 233, 150, 50, 0, 0, 0],
+            [1, 285, 150, 50, 0, 0, 0],
+            [153, 285, 65, 65, 0, 0, 0],
+            [220, 285, 65, 65, 0, 0, 0],
+            [287, 285, 62, 63, 0, 0, 0]
         ],
         "animations": {
-            "bullet": { "frames": [0] },
-            "button": { "frames": [1] },
-            "cloud": { "frames": [2] },
-            "island": { "frames": [3] },
-            "placeholder": { "frames": [4] },
-            "plane": {
-                "frames": [5, 6, 7],
-                "speed": 0.5
-            },
-            "restartButton": { "frames": [8] },
-            "startButton": { "frames": [9] }
+            "cloud": { "frames": [0] },
+            "backButton": { "frames": [1] },
+            "button": { "frames": [2] },
+            "placeholder": { "frames": [3] },
+            "plane1": { "frames": [4] },
+            "bullet": { "frames": [5] },
+            "agent": { "frames": [6] },
+            "enemy": { "frames": [7] },
+            "nextButton": { "frames": [8] },
+            "restartButton": { "frames": [9] },
+            "startButton": { "frames": [10] },
+            "plane2": { "frames": [11] },
+            "plane3": { "frames": [12] },
+            "island": { "frames": [13] }
         }
     };
     var oceanData = {
         "images": {},
         "frames": [
-            [0, 0, 640, 1440, 0, 0, 0],
+            [0, 0, 640, 1200, 0, 0, 0],
         ],
         "animations": {
             "ocean": { "frames": [0] },

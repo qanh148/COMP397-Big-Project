@@ -18,7 +18,7 @@ var objects;
         __extends(Plane, _super);
         // CONSTRUCTOR
         function Plane() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "plane", 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "agent", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
@@ -40,11 +40,11 @@ var objects;
             if (this.position.x >= config.Game.SCREEN_WIDTH - this.halfWidth) {
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, this.position.y);
             }
-            // left boundary
+            // down boundary
             if (this.position.y <= this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, this.halfHeight);
             }
-            // right boundary
+            // top boundary
             if (this.position.y >= config.Game.SCREEN_HEIGHT - this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
             }
@@ -65,6 +65,8 @@ var objects;
                 this.position.y -= pace;
             }
             this.position = new objects.Vector2(this.position.x, this.position.y);
+            this.rotation = Math.atan2(this.stage.mouseX - this.position.x, -(this.stage.mouseY - this.position.y)) * (180 / Math.PI);
+            this._bulletSpawn = this.position;
         };
         // PUBLIC METHODS
         Plane.prototype.Start = function () {
@@ -72,7 +74,7 @@ var objects;
             this._engineSound = createjs.Sound.play("engine");
             this._engineSound.loop = -1; // loop forever
             this._engineSound.volume = 0.1; // 10% volume
-            this._horizontalSpeed = 10;
+            this.rotation = 0;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, config.Game.SCREEN_HEIGHT * 0.5);
         };
         Plane.prototype.Update = function () {
@@ -90,6 +92,10 @@ var objects;
         Plane.prototype.FireBullets = function () {
             var bullet = config.Game.BULLET_MANAGER.GetBullet();
             bullet.position = this._bulletSpawn;
+            var dir = Math.atan2(this.stage.mouseY - this.position.y, this.stage.mouseX - this.position.x);
+            this._horizontalSpeed = Math.cos(dir) * 10;
+            this._verticalSpeed = Math.sin(dir) * 10;
+            bullet.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
         };
         return Plane;
     }(objects.GameObject));

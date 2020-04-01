@@ -102,7 +102,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -117,7 +117,7 @@
             <key>basic</key>
             <struct type="AlgorithmBasicSettings">
                 <key>sortBy</key>
-                <enum type="AlgorithmBasicSettings::SortBy">Name</enum>
+                <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
             </struct>
@@ -149,7 +149,7 @@
             <string></string>
         </struct>
         <key>autoAliasEnabled</key>
-        <false/>
+        <true/>
         <key>trimSpriteNames</key>
         <false/>
         <key>prependSmartFolderName</key>
@@ -181,7 +181,8 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../images/bullet.png</key>
+            <key type="filename">../images/agent.png</key>
+            <key type="filename">../images/enemy.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -190,13 +191,15 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>4,4,8,8</rect>
+                <rect>15,15,30,30</rect>
                 <key>scale9Paddings</key>
-                <rect>4,4,8,8</rect>
+                <rect>15,15,30,30</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../images/backButton.png</key>
             <key type="filename">../images/button.png</key>
+            <key type="filename">../images/nextButton.png</key>
             <key type="filename">../images/restartButton.png</key>
             <key type="filename">../images/startButton.png</key>
             <struct type="IndividualSpriteSettings">
@@ -210,6 +213,21 @@
                 <rect>38,13,75,25</rect>
                 <key>scale9Paddings</key>
                 <rect>38,13,75,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../images/bullet.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,4,8,8</rect>
+                <key>scale9Paddings</key>
+                <rect>4,4,8,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -264,16 +282,20 @@
         </map>
         <key>fileList</key>
         <array>
+            <filename>../images/agent.png</filename>
+            <filename>../images/backButton.png</filename>
+            <filename>../images/bullet.png</filename>
             <filename>../images/button.png</filename>
-            <filename>../images/placeholder.png</filename>
-            <filename>../images/startButton.png</filename>
-            <filename>../images/restartButton.png</filename>
             <filename>../images/cloud.png</filename>
+            <filename>../images/enemy.png</filename>
             <filename>../images/island.png</filename>
+            <filename>../images/nextButton.png</filename>
+            <filename>../images/placeholder.png</filename>
             <filename>../images/plane1.png</filename>
             <filename>../images/plane2.png</filename>
             <filename>../images/plane3.png</filename>
-            <filename>../images/bullet.png</filename>
+            <filename>../images/restartButton.png</filename>
+            <filename>../images/startButton.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

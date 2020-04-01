@@ -9,7 +9,6 @@ var managers;
             var radii = object1.halfHeight + object2.halfHeight;
             if (objects.Vector2.sqrDistance(object1.position, object2.position) < (radii * radii)) {
                 if (!object2.isColliding) {
-                    Collision._collisionResponse(object2);
                     object2.isColliding = true;
                     return true;
                 }
@@ -30,7 +29,6 @@ var managers;
                 object1TopLeft.y < object2TopLeft.y + object2.height &&
                 object1TopLeft.y + object1.height > object2TopLeft.y) {
                 if (!object2.isColliding) {
-                    Collision._collisionResponse(object2);
                     object2.isColliding = true;
                     return true;
                 }
@@ -48,31 +46,32 @@ var managers;
          * @param {objects.GameObject} object2
          * @memberof Collision
          */
-        Collision._collisionResponse = function (object2) {
-            switch (object2.type) {
-                case enums.GameObjectType.ISLAND:
-                    {
-                        console.log("Collision with Island!");
-                        var yaySound = createjs.Sound.play("yay");
-                        yaySound.volume = 0.2;
-                        config.Game.SCORE_BOARD.Score += 100;
-                        if (config.Game.SCORE > config.Game.HIGH_SCORE) {
-                            config.Game.HIGH_SCORE = config.Game.SCORE;
-                        }
+        Collision._collisionResponse = function (object1, object2) {
+            if (object1.type === enums.GameObjectType.PLANE) {
+                if (object2.type == enums.GameObjectType.ISLAND) {
+                    console.log("Collision with Island!");
+                    var yaySound = createjs.Sound.play("yay");
+                    yaySound.volume = 0.2;
+                    config.Game.SCORE_BOARD.Score += 100;
+                    if (config.Game.SCORE > config.Game.HIGH_SCORE) {
+                        config.Game.HIGH_SCORE = config.Game.SCORE;
                     }
-                    break;
-                case enums.GameObjectType.CLOUD:
-                    {
-                        console.log("Collision with Cloud!");
-                        var thunderSound = createjs.Sound.play("thunder");
-                        thunderSound.volume = 0.2;
-                        config.Game.SCORE_BOARD.Lives -= 1;
-                        // check if lives falls less than 1 and then switch to END scene
-                        if (config.Game.LIVES < 1) {
-                            config.Game.SCENE = scenes.State.END;
-                        }
+                }
+                if (object2.type === enums.GameObjectType.CLOUD) {
+                    console.log("Collision with Cloud!");
+                    var thunderSound = createjs.Sound.play("thunder");
+                    thunderSound.volume = 0.2;
+                    config.Game.SCORE_BOARD.Lives -= 1;
+                    // check if lives falls less than 1 and then switch to END scene
+                    if (config.Game.LIVES < 1) {
+                        config.Game.SCENE = scenes.State.END;
                     }
-                    break;
+                }
+            }
+            if (object1.type === enums.GameObjectType.BULLET) {
+                if (object2.type === enums.GameObjectType.CLOUD) {
+                    console.log("Bullet Collision with Cloud!");
+                }
             }
         };
         return Collision;
