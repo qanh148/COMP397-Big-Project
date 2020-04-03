@@ -20,7 +20,7 @@ module managers
         private _buildBulletPool():void
         {
             // initialize bullet number
-            this._bulletNumber = 100;
+            this._bulletNumber = config.Game.AMMO;
 
             // create an empty container
             this._bulletPool = new Array<objects.Bullet>();
@@ -47,7 +47,7 @@ module managers
             let bullet = this._bulletPool.shift();
 
             bullet.isActive = true;
-            
+            config.Game.SCORE_BOARD.Ammo-=1;
             // push the bullet to the back of the pool
             this._bulletPool.push(bullet);
             // return a reference to the active bullet

@@ -1,6 +1,6 @@
 module objects
 {
-    export class Island extends GameObject
+    export class Supply extends GameObject
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalSpeed?:number;
@@ -10,8 +10,8 @@ module objects
         // CONSTRUCTOR
         constructor()
         {
-            super(config.Game.TEXTURE_ATLAS, "island", new Vector2(), true);
-
+            super(config.Game.TEXTURE_ATLAS, "bullet1", new Vector2(), true);
+            
             this.Start();
         }
 
@@ -33,7 +33,7 @@ module objects
         // PUBLIC METHODS
         public Start(): void 
         {
-            this.type = enums.GameObjectType.ISLAND;
+            this.type = enums.GameObjectType.SUPPLY;
             this._verticalSpeed = 5; // 5 px per frame
             this.velocity = new Vector2(0, this._verticalSpeed);
             this.Reset();
@@ -48,6 +48,20 @@ module objects
         public Reset(): void 
         {
             let randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
+            let randomSupply= Math.floor(util.Mathf.RandomRange(1,10));
+            console.log(randomSupply);
+            if(randomSupply<6)
+            {
+                this.gotoAndPlay("bullet1");
+            }
+            else if(randomSupply<9)
+            {
+                this.gotoAndPlay("bullet2");
+            }
+            else if(randomSupply<11)
+            {
+                this.gotoAndPlay("bullet3");
+            }
             this.position = new Vector2(randomX, -this.height);
         }
 

@@ -2,9 +2,9 @@ module enums
 {
     export enum GameObjectType
     {
-        PLANE,
-        ISLAND,
-        CLOUD,
+        AGENT,
+        SUPPLY,
+        ENEMY1,
         OCEAN,
         BUTTON,
         PLAYER,

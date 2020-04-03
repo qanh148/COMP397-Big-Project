@@ -14,18 +14,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Cloud = /** @class */ (function (_super) {
-        __extends(Cloud, _super);
+    var Enemy1 = /** @class */ (function (_super) {
+        __extends(Enemy1, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Cloud() {
+        function Enemy1() {
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "enemy", new objects.Vector2(), true) || this;
             _this._frame = 0;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
-        Cloud.prototype._checkBounds = function () {
+        Enemy1.prototype._checkBounds = function () {
             if (this.y >= config.Game.SCREEN_HEIGHT + this.height) {
                 this.Reset();
             }
@@ -36,17 +36,17 @@ var objects;
                 this._horizontalSpeed = util.Mathf.RandomRange(-3, 0);
             }
         };
-        Cloud.prototype._move = function () {
+        Enemy1.prototype._move = function () {
             this.position = objects.Vector2.add(this.position, this.velocity);
         };
         // PUBLIC METHODS
-        Cloud.prototype.Start = function () {
-            this.type = enums.GameObjectType.CLOUD;
+        Enemy1.prototype.Start = function () {
+            this.type = enums.GameObjectType.ENEMY1;
             this.alpha = 1; // 100% transparent
             this.rotation = 180;
             this.Reset();
         };
-        Cloud.prototype.Update = function () {
+        Enemy1.prototype.Update = function () {
             this._move();
             this._checkBounds();
             this._frame += 1;
@@ -55,7 +55,7 @@ var objects;
             }
             this.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
         };
-        Cloud.prototype.Reset = function () {
+        Enemy1.prototype.Reset = function () {
             this._verticalSpeed = util.Mathf.RandomRange(3, 5);
             this._horizontalSpeed = util.Mathf.RandomRange(-2, 2);
             this.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
@@ -63,8 +63,8 @@ var objects;
             var randomY = util.Mathf.RandomRange(-this.height * 3, -this.height);
             this.position = new objects.Vector2(randomX, randomY);
         };
-        return Cloud;
+        return Enemy1;
     }(objects.GameObject));
-    objects.Cloud = Cloud;
+    objects.Enemy1 = Enemy1;
 })(objects || (objects = {}));
-//# sourceMappingURL=Cloud.js.map
+//# sourceMappingURL=Enemy1.js.map

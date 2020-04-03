@@ -1,6 +1,6 @@
 module objects
 {
-    export class Cloud extends GameObject
+    export class Enemy1 extends GameObject
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalSpeed?:number;
@@ -42,7 +42,7 @@ module objects
         // PUBLIC METHODS
         public Start(): void 
         {
-            this.type = enums.GameObjectType.CLOUD;
+            this.type = enums.GameObjectType.ENEMY1;
             this.alpha = 1; // 100% transparent
             this.rotation= 180
             this.Reset();

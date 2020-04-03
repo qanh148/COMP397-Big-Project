@@ -3,9 +3,9 @@ var enums;
 (function (enums) {
     var GameObjectType;
     (function (GameObjectType) {
-        GameObjectType[GameObjectType["PLANE"] = 0] = "PLANE";
-        GameObjectType[GameObjectType["ISLAND"] = 1] = "ISLAND";
-        GameObjectType[GameObjectType["CLOUD"] = 2] = "CLOUD";
+        GameObjectType[GameObjectType["AGENT"] = 0] = "AGENT";
+        GameObjectType[GameObjectType["SUPPLY"] = 1] = "SUPPLY";
+        GameObjectType[GameObjectType["ENEMY1"] = 2] = "ENEMY1";
         GameObjectType[GameObjectType["OCEAN"] = 3] = "OCEAN";
         GameObjectType[GameObjectType["BUTTON"] = 4] = "BUTTON";
         GameObjectType[GameObjectType["PLAYER"] = 5] = "PLAYER";

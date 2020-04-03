@@ -43,6 +43,18 @@ var managers;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ScoreBoard.prototype, "Ammo", {
+            get: function () {
+                return this._ammo;
+            },
+            set: function (v) {
+                this._ammo = v;
+                config.Game.AMMO = this._ammo;
+                this.ammoLabel.text = "Ammo: " + this._ammo;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(ScoreBoard.prototype, "LivesLabel", {
             get: function () {
                 return this._livesLabel;
@@ -64,14 +76,23 @@ var managers;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ScoreBoard.prototype, "ammoLabel", {
+            get: function () {
+                return this._ammoLabel;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // private methods
         ScoreBoard.prototype._initialize = function () {
             this._livesLabel = new objects.Label("Lives: 99", "20px", "Consolas", "#FFFF00", 20, 20);
             this._scoreLabel = new objects.Label("Score: 99999", "20px", "Consolas", "#FFFF00", 490, 20);
             this._highScoreLabel = new objects.Label("High Score: 99999", "40px", "Consolas", "#FFFF00", 320, 290);
+            this._ammoLabel = new objects.Label("Ammo: 999", "20px", "Consolas", "#FFFF00", 20, 50);
             this.Lives = config.Game.LIVES;
             this.Score = config.Game.SCORE;
             this.HighScore = config.Game.HIGH_SCORE;
+            this.Ammo = config.Game.AMMO;
         };
         return ScoreBoard;
     }());

@@ -14,41 +14,52 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Island = /** @class */ (function (_super) {
-        __extends(Island, _super);
+    var Supply = /** @class */ (function (_super) {
+        __extends(Supply, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Island() {
-            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "island", new objects.Vector2(), true) || this;
+        function Supply() {
+            var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "bullet1", new objects.Vector2(), true) || this;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
-        Island.prototype._checkBounds = function () {
+        Supply.prototype._checkBounds = function () {
             if (this.y >= config.Game.SCREEN_HEIGHT + this.height) {
                 this.Reset();
             }
         };
-        Island.prototype._move = function () {
+        Supply.prototype._move = function () {
             this.position = objects.Vector2.add(this.position, this.velocity);
         };
         // PUBLIC METHODS
-        Island.prototype.Start = function () {
-            this.type = enums.GameObjectType.ISLAND;
+        Supply.prototype.Start = function () {
+            this.type = enums.GameObjectType.SUPPLY;
             this._verticalSpeed = 5; // 5 px per frame
             this.velocity = new objects.Vector2(0, this._verticalSpeed);
             this.Reset();
         };
-        Island.prototype.Update = function () {
+        Supply.prototype.Update = function () {
             this._move();
             this._checkBounds();
         };
-        Island.prototype.Reset = function () {
+        Supply.prototype.Reset = function () {
             var randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
+            var randomSupply = Math.floor(util.Mathf.RandomRange(1, 10));
+            console.log(randomSupply);
+            if (randomSupply < 6) {
+                this.gotoAndPlay("bullet1");
+            }
+            else if (randomSupply < 9) {
+                this.gotoAndPlay("bullet2");
+            }
+            else if (randomSupply < 11) {
+                this.gotoAndPlay("bullet3");
+            }
             this.position = new objects.Vector2(randomX, -this.height);
         };
-        return Island;
+        return Supply;
     }(objects.GameObject));
-    objects.Island = Island;
+    objects.Supply = Supply;
 })(objects || (objects = {}));
-//# sourceMappingURL=Island.js.map
+//# sourceMappingURL=Supply.js.map

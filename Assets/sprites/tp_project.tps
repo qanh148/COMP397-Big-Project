@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -82,7 +82,7 @@
         <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">png8</enum>
         <key>borderPadding</key>
         <uint>0</uint>
         <key>maxTextureSize</key>
@@ -182,6 +182,9 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">../images/agent.png</key>
+            <key type="filename">../images/bullet1.png</key>
+            <key type="filename">../images/bullet2.png</key>
+            <key type="filename">../images/bullet3.png</key>
             <key type="filename">../images/enemy.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -296,6 +299,9 @@
             <filename>../images/plane3.png</filename>
             <filename>../images/restartButton.png</filename>
             <filename>../images/startButton.png</filename>
+            <filename>../images/bullet1.png</filename>
+            <filename>../images/bullet2.png</filename>
+            <filename>../images/bullet3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -10,7 +10,7 @@ var managers;
         // PRIVATE METHODS
         Bullet.prototype._buildBulletPool = function () {
             // initialize bullet number
-            this._bulletNumber = 100;
+            this._bulletNumber = config.Game.AMMO;
             // create an empty container
             this._bulletPool = new Array();
             for (var count = 0; count < this._bulletNumber; count++) {
@@ -28,6 +28,7 @@ var managers;
             // remove the bullet from the front of the pool
             var bullet = this._bulletPool.shift();
             bullet.isActive = true;
+            config.Game.SCORE_BOARD.Ammo -= 1;
             // push the bullet to the back of the pool
             this._bulletPool.push(bullet);
             // return a reference to the active bullet

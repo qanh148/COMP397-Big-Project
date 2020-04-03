@@ -14,15 +14,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Plane = /** @class */ (function (_super) {
-        __extends(Plane, _super);
+    var Agent = /** @class */ (function (_super) {
+        __extends(Agent, _super);
         // CONSTRUCTOR
-        function Plane() {
+        function Agent() {
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "agent", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Plane.prototype, "engineSound", {
+        Object.defineProperty(Agent.prototype, "engineSound", {
             // PUBLIC PROPERTIES
             get: function () {
                 return this._engineSound;
@@ -31,7 +31,7 @@ var objects;
             configurable: true
         });
         // PRIVATE METHODS
-        Plane.prototype._checkBounds = function () {
+        Agent.prototype._checkBounds = function () {
             // left boundary
             if (this.position.x <= this.halfWidth) {
                 this.position = new objects.Vector2(this.halfWidth, this.position.y);
@@ -49,7 +49,7 @@ var objects;
                 this.position = new objects.Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
             }
         };
-        Plane.prototype._move = function () {
+        Agent.prototype._move = function () {
             var pace = 4;
             // Keyboard Controls
             if (config.Game.KEYBOARD_MANAGER.MoveLeft) {
@@ -69,15 +69,15 @@ var objects;
             this._bulletSpawn = this.position;
         };
         // PUBLIC METHODS
-        Plane.prototype.Start = function () {
-            this.type = enums.GameObjectType.PLANE;
+        Agent.prototype.Start = function () {
+            this.type = enums.GameObjectType.AGENT;
             this._engineSound = createjs.Sound.play("engine");
             this._engineSound.loop = -1; // loop forever
             this._engineSound.volume = 0.1; // 10% volume
             this.rotation = 0;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, config.Game.SCREEN_HEIGHT * 0.5);
         };
-        Plane.prototype.Update = function () {
+        Agent.prototype.Update = function () {
             this._move();
             this._checkBounds();
             // fire bullets every 10 frames
@@ -87,18 +87,23 @@ var objects;
                 }
             }
         };
-        Plane.prototype.Reset = function () {
+        Agent.prototype.Reset = function () {
         };
-        Plane.prototype.FireBullets = function () {
-            var bullet = config.Game.BULLET_MANAGER.GetBullet();
-            bullet.position = this._bulletSpawn;
-            var dir = Math.atan2(this.stage.mouseY - this.position.y, this.stage.mouseX - this.position.x);
-            this._horizontalSpeed = Math.cos(dir) * 10;
-            this._verticalSpeed = Math.sin(dir) * 10;
-            bullet.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
+        Agent.prototype.FireBullets = function () {
+            if (config.Game.SCORE_BOARD.Ammo >= 1) {
+                var bullet = config.Game.BULLET_MANAGER.GetBullet();
+                bullet.position = this._bulletSpawn;
+                var dir = Math.atan2(this.stage.mouseY - this.position.y, this.stage.mouseX - this.position.x);
+                this._horizontalSpeed = Math.cos(dir) * 10;
+                this._verticalSpeed = Math.sin(dir) * 10;
+                bullet.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
+            }
+            else {
+                console.log("OUT OF AMMO");
+            }
         };
-        return Plane;
+        return Agent;
     }(objects.GameObject));
-    objects.Plane = Plane;
+    objects.Agent = Agent;
 })(objects || (objects = {}));
-//# sourceMappingURL=Plane.js.map
+//# sourceMappingURL=Agent.js.map

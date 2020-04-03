@@ -47,8 +47,8 @@ var managers;
          * @memberof Collision
          */
         Collision._collisionResponse = function (object1, object2) {
-            if (object1.type === enums.GameObjectType.PLANE) {
-                if (object2.type == enums.GameObjectType.ISLAND) {
+            if (object1.type === enums.GameObjectType.AGENT) {
+                if (object2.type == enums.GameObjectType.SUPPLY) {
                     console.log("Collision with Island!");
                     var yaySound = createjs.Sound.play("yay");
                     yaySound.volume = 0.2;
@@ -57,7 +57,7 @@ var managers;
                         config.Game.HIGH_SCORE = config.Game.SCORE;
                     }
                 }
-                if (object2.type === enums.GameObjectType.CLOUD) {
+                if (object2.type === enums.GameObjectType.ENEMY1) {
                     console.log("Collision with Cloud!");
                     var thunderSound = createjs.Sound.play("thunder");
                     thunderSound.volume = 0.2;
@@ -69,7 +69,7 @@ var managers;
                 }
             }
             if (object1.type === enums.GameObjectType.BULLET) {
-                if (object2.type === enums.GameObjectType.CLOUD) {
+                if (object2.type === enums.GameObjectType.ENEMY1) {
                     console.log("Bullet Collision with Cloud!");
                 }
             }

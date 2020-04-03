@@ -7,9 +7,10 @@ module config
         public static SCENE: scenes.State;
         public static ASSETS: createjs.LoadQueue;
         public static FPS: number = 60; // 60 Frames per second
-        public static CLOUD_NUM: number = 2;
+        public static CLOUD_NUM: number = 3;
         public static LIVES: number = 5;
         public static SCORE: number = 0;
+        public static AMMO: number = 30;
         public static HIGH_SCORE: number = 0;
         public static SCORE_BOARD: managers.ScoreBoard;
         public static BULLET_MANAGER: managers.Bullet;

@@ -32,7 +32,7 @@ module scenes
              this._ocean = new objects.Ocean();
             this.Main();
         }        
-        
+            
         public Update(): void 
         {
            this._ocean.Update();
