@@ -34,7 +34,7 @@ module scenes
              this._ocean = new objects.Ocean();
 
              this._scoreBoard  = new managers.ScoreBoard();
-             this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
+             this._scoreBoard.Score = config.Game.SCORE;
              this.Main();
         }        
         
@@ -57,7 +57,7 @@ module scenes
                 config.Game.SCENE = scenes.State.START;
             });
 
-            this.addChild(this._scoreBoard.highScoreLabel);
+            this.addChild(this._scoreBoard.ScoreLabel);
 
         }
 

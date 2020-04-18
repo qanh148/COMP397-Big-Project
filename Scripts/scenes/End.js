@@ -33,7 +33,7 @@ var scenes;
             this._restartButton = new objects.Button("restartButton", 320, 430, true);
             this._ocean = new objects.Ocean();
             this._scoreBoard = new managers.ScoreBoard();
-            this._scoreBoard.HighScore = config.Game.HIGH_SCORE;
+            this._scoreBoard.Score = config.Game.SCORE;
             this.Main();
         };
         End.prototype.Update = function () {
@@ -47,7 +47,7 @@ var scenes;
                 config.Game.Reset();
                 config.Game.SCENE = scenes.State.START;
             });
-            this.addChild(this._scoreBoard.highScoreLabel);
+            this.addChild(this._scoreBoard.ScoreLabel);
         };
         End.prototype.Clean = function () {
             this.removeAllChildren();
