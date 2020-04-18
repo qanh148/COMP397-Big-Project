@@ -134,7 +134,7 @@ module scenes {
         }
 
         public Clean(): void {
-            this._agent.engineSound.stop();
+            
             this.removeAllChildren();
         }
 

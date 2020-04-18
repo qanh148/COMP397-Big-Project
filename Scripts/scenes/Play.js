@@ -109,7 +109,6 @@ var scenes;
             this.addChild(this._scoreBoard.ammoLabel);
         };
         Play.prototype.Clean = function () {
-            this._agent.engineSound.stop();
             this.removeAllChildren();
         };
         return Play;

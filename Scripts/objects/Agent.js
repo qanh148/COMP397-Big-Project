@@ -16,20 +16,13 @@ var objects;
 (function (objects) {
     var Agent = /** @class */ (function (_super) {
         __extends(Agent, _super);
+        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Agent() {
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "agent", 0, 0, true) || this;
             _this.Start();
             return _this;
         }
-        Object.defineProperty(Agent.prototype, "engineSound", {
-            // PUBLIC PROPERTIES
-            get: function () {
-                return this._engineSound;
-            },
-            enumerable: true,
-            configurable: true
-        });
         // PRIVATE METHODS
         Agent.prototype._checkBounds = function () {
             // left boundary
@@ -71,9 +64,6 @@ var objects;
         // PUBLIC METHODS
         Agent.prototype.Start = function () {
             this.type = enums.GameObjectType.AGENT;
-            this._engineSound = createjs.Sound.play("engine");
-            this._engineSound.loop = -1; // loop forever
-            this._engineSound.volume = 0.1; // 10% volume
             this.rotation = 0;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, config.Game.SCREEN_HEIGHT * 0.5);
         };

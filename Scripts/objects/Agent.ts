@@ -2,14 +2,12 @@ module objects {
     export class Agent extends GameObject {
         // PRIVATE INSTANCE MEMBERS
 
-        private _engineSound: createjs.AbstractSoundInstance;
+        
         private _bulletSpawn: objects.Vector2;
         private _horizontalSpeed: number;
         private _verticalSpeed: number;
         // PUBLIC PROPERTIES
-        public get engineSound(): createjs.AbstractSoundInstance {
-            return this._engineSound;
-        }
+        
 
         // CONSTRUCTOR
         constructor() {
@@ -86,9 +84,7 @@ module objects {
         public Start(): void {
             this.type = enums.GameObjectType.AGENT;
 
-            this._engineSound = createjs.Sound.play("engine");
-            this._engineSound.loop = -1; // loop forever
-            this._engineSound.volume = 0.1; // 10% volume
+            
             this.rotation = 0;
             this.position = new objects.Vector2(config.Game.SCREEN_WIDTH * 0.5, config.Game.SCREEN_HEIGHT * 0.5);
         }
