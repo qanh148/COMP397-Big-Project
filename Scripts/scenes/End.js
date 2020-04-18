@@ -44,9 +44,8 @@ var scenes;
             this.addChild(this._gameOverLabel);
             this.addChild(this._restartButton);
             this._restartButton.on("click", function () {
-                config.Game.LIVES = 5;
-                config.Game.SCORE = 0;
-                config.Game.SCENE = scenes.State.PLAY;
+                config.Game.Reset();
+                config.Game.SCENE = scenes.State.START;
             });
             this.addChild(this._scoreBoard.highScoreLabel);
         };

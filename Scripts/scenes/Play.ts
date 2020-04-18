@@ -33,6 +33,7 @@ module scenes {
             this._supply = new objects.Supply();
 
             // create the cloud array
+            
             this._enemy1 = new Array<objects.Enemy1>(); // empty container
 
             // instantiating CLOUD_NUM clouds
@@ -64,13 +65,17 @@ module scenes {
 
             if (managers.Collision.squaredRadiusCheck(this._agent, this._supply)) {
                 console.log("Collision with Supply!");
-                let yaySound = createjs.Sound.play("yay");
-                yaySound.volume = 0.2;
-                config.Game.SCORE_BOARD.Ammo += 10;
-
-                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
-                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                
+                if(this._supply.currentAnimation=="bullet1"){
+                    config.Game.SCORE_BOARD.Ammo += 20;
                 }
+                else if(this._supply.currentAnimation=="bullet2"){
+                    config.Game.SCORE_BOARD.Ammo += 30;
+                }
+                else if(this._supply.currentAnimation=="bullet3"){
+                    config.Game.SCORE_BOARD.Ammo += 40;
+                }
+                this._supply.Reset();
             }
 
 
@@ -82,22 +87,28 @@ module scenes {
                     thunderSound.volume = 0.2;
                     
                     config.Game.SCORE_BOARD.Lives -= 1;
-                    // check if lives falls less than 1 and then switch to END scene
-                    if (config.Game.LIVES < 1) {
-                        config.Game.SCENE = scenes.State.END;
-                    }
+                    
                 }
             });
             let bullet: objects.Bullet;
             for (bullet of managers.Bullet.firingBullet) {
                 this._enemy1.forEach(cloud => {
                     if(managers.Collision.squaredRadiusCheck(cloud, bullet)){
-                        console.log("Bullet Collision with Cloud!");
+                        console.log("Bullet Collision with Enemy!");
                         config.Game.SCORE_BOARD.Score += 20;
+                        let randomSupply= Math.floor(util.Mathf.RandomRange(1,4));
+                        if(randomSupply==2 && this._supply.position.x==-1000){
+                            this._supply.position =  cloud.position;
+                            this._supply.isActive=true;
+                        }
                         bullet.Reset();
                         cloud.Reset();
                     }
                 });
+            }
+            // check if lives falls less than 1 and then switch to END scene
+            if (config.Game.LIVES < 1) {
+                config.Game.SCENE = scenes.State.END;
             }
 
         }

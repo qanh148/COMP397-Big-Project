@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.3.0</string>
+        <string>5.2.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -202,7 +202,10 @@
             </struct>
             <key type="filename">../images/backButton.png</key>
             <key type="filename">../images/button.png</key>
+            <key type="filename">../images/easyButton.png</key>
+            <key type="filename">../images/hardButton.png</key>
             <key type="filename">../images/nextButton.png</key>
+            <key type="filename">../images/normalButton.png</key>
             <key type="filename">../images/restartButton.png</key>
             <key type="filename">../images/startButton.png</key>
             <struct type="IndividualSpriteSettings">
@@ -302,6 +305,9 @@
             <filename>../images/bullet1.png</filename>
             <filename>../images/bullet2.png</filename>
             <filename>../images/bullet3.png</filename>
+            <filename>../images/easyButton.png</filename>
+            <filename>../images/hardButton.png</filename>
+            <filename>../images/normalButton.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

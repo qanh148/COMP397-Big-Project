@@ -28,6 +28,7 @@ var objects;
         Enemy1.prototype._checkBounds = function () {
             if (this.y >= config.Game.SCREEN_HEIGHT + this.height) {
                 this.Reset();
+                config.Game.SCORE_BOARD.Lives--;
             }
             if (this.position.x <= this.halfWidth) {
                 this._horizontalSpeed = util.Mathf.RandomRange(0, 3);
@@ -56,7 +57,7 @@ var objects;
             this.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
         };
         Enemy1.prototype.Reset = function () {
-            this._verticalSpeed = util.Mathf.RandomRange(3, 5);
+            this._verticalSpeed = util.Mathf.RandomRange(1.5, 3);
             this._horizontalSpeed = util.Mathf.RandomRange(-2, 2);
             this.velocity = new objects.Vector2(this._horizontalSpeed, this._verticalSpeed);
             var randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);

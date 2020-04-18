@@ -23,6 +23,7 @@ module objects
             if(this.y >= config.Game.SCREEN_HEIGHT + this.height)
             {
                 this.Reset();
+                config.Game.SCORE_BOARD.Lives--;
             }
             if(this.position.x <= this.halfWidth)
             {
@@ -62,7 +63,7 @@ module objects
         
         public Reset(): void 
         {
-            this._verticalSpeed = util.Mathf.RandomRange(3, 5);
+            this._verticalSpeed = util.Mathf.RandomRange(1.5, 3);
             this._horizontalSpeed = util.Mathf.RandomRange(-2, 2);
             this.velocity = new Vector2(this._horizontalSpeed, this._verticalSpeed);
             let randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);

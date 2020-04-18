@@ -53,12 +53,16 @@ var scenes;
             this._supply.Update();
             if (managers.Collision.squaredRadiusCheck(this._agent, this._supply)) {
                 console.log("Collision with Supply!");
-                var yaySound = createjs.Sound.play("yay");
-                yaySound.volume = 0.2;
-                config.Game.SCORE_BOARD.Ammo += 10;
-                if (config.Game.SCORE > config.Game.HIGH_SCORE) {
-                    config.Game.HIGH_SCORE = config.Game.SCORE;
+                if (this._supply.currentAnimation == "bullet1") {
+                    config.Game.SCORE_BOARD.Ammo += 20;
                 }
+                else if (this._supply.currentAnimation == "bullet2") {
+                    config.Game.SCORE_BOARD.Ammo += 30;
+                }
+                else if (this._supply.currentAnimation == "bullet3") {
+                    config.Game.SCORE_BOARD.Ammo += 40;
+                }
+                this._supply.Reset();
             }
             this._enemy1.forEach(function (cloud) {
                 cloud.Update();
@@ -67,10 +71,6 @@ var scenes;
                     var thunderSound = createjs.Sound.play("thunder");
                     thunderSound.volume = 0.2;
                     config.Game.SCORE_BOARD.Lives -= 1;
-                    // check if lives falls less than 1 and then switch to END scene
-                    if (config.Game.LIVES < 1) {
-                        config.Game.SCENE = scenes.State.END;
-                    }
                 }
             });
             var bullet;
@@ -78,12 +78,21 @@ var scenes;
                 bullet = _a[_i];
                 this._enemy1.forEach(function (cloud) {
                     if (managers.Collision.squaredRadiusCheck(cloud, bullet)) {
-                        console.log("Bullet Collision with Cloud!");
+                        console.log("Bullet Collision with Enemy!");
                         config.Game.SCORE_BOARD.Score += 20;
+                        var randomSupply = Math.floor(util.Mathf.RandomRange(1, 4));
+                        if (randomSupply == 2 && _this._supply.position.x == -1000) {
+                            _this._supply.position = cloud.position;
+                            _this._supply.isActive = true;
+                        }
                         bullet.Reset();
                         cloud.Reset();
                     }
                 });
+            }
+            // check if lives falls less than 1 and then switch to END scene
+            if (config.Game.LIVES < 1) {
+                config.Game.SCENE = scenes.State.END;
             }
         };
         Play.prototype.Main = function () {

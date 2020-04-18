@@ -4,7 +4,7 @@ module objects
     {
         // PRIVATE INSTANCE MEMBERS
         private _verticalSpeed?:number;
-
+        private _activeTime: number =0;
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
@@ -25,44 +25,63 @@ module objects
             }
         }       
         
-        private _move():void
+        protected _checkTime(): void 
         {
-            this.position = Vector2.add(this.position, this.velocity);
-        }
+            if(this.isActive== true){
+                this._activeTime++;
+            }
+            if(this._activeTime>=300){
+                if(this._activeTime%40==20){
+                    this.alpha=0.5;
+                }
+                if(this._activeTime%40==0){
+                    this.alpha=1;
+                }
+            }
+            if(this._activeTime==500){
+                this.Reset();
+            }
+        }     
+        
         
         // PUBLIC METHODS
         public Start(): void 
         {
+            this.isActive=false;
             this.type = enums.GameObjectType.SUPPLY;
-            this._verticalSpeed = 5; // 5 px per frame
-            this.velocity = new Vector2(0, this._verticalSpeed);
+            this.position = new Vector2(-1000,-1000);
             this.Reset();
         }
         
         public Update(): void 
         {
-            this._move();
-            this._checkBounds();
+            this._checkTime();
         }
         
         public Reset(): void 
         {
-            let randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
+            this.alpha=1;
+            this._activeTime=0;
+            this.isActive=false;
+            this.position = new Vector2(-1000,-1000);
             let randomSupply= Math.floor(util.Mathf.RandomRange(1,10));
             console.log(randomSupply);
             if(randomSupply<6)
             {
                 this.gotoAndPlay("bullet1");
+                
             }
             else if(randomSupply<9)
             {
                 this.gotoAndPlay("bullet2");
+                
             }
             else if(randomSupply<11)
             {
                 this.gotoAndPlay("bullet3");
+                
             }
-            this.position = new Vector2(randomX, -this.height);
+            
         }
 
         

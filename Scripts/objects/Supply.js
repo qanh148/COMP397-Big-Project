@@ -20,6 +20,7 @@ var objects;
         // CONSTRUCTOR
         function Supply() {
             var _this = _super.call(this, config.Game.TEXTURE_ATLAS, "bullet1", new objects.Vector2(), true) || this;
+            _this._activeTime = 0;
             _this.Start();
             return _this;
         }
@@ -29,22 +30,37 @@ var objects;
                 this.Reset();
             }
         };
-        Supply.prototype._move = function () {
-            this.position = objects.Vector2.add(this.position, this.velocity);
+        Supply.prototype._checkTime = function () {
+            if (this.isActive == true) {
+                this._activeTime++;
+            }
+            if (this._activeTime >= 300) {
+                if (this._activeTime % 40 == 20) {
+                    this.alpha = 0.5;
+                }
+                if (this._activeTime % 40 == 0) {
+                    this.alpha = 1;
+                }
+            }
+            if (this._activeTime == 500) {
+                this.Reset();
+            }
         };
         // PUBLIC METHODS
         Supply.prototype.Start = function () {
+            this.isActive = false;
             this.type = enums.GameObjectType.SUPPLY;
-            this._verticalSpeed = 5; // 5 px per frame
-            this.velocity = new objects.Vector2(0, this._verticalSpeed);
+            this.position = new objects.Vector2(-1000, -1000);
             this.Reset();
         };
         Supply.prototype.Update = function () {
-            this._move();
-            this._checkBounds();
+            this._checkTime();
         };
         Supply.prototype.Reset = function () {
-            var randomX = util.Mathf.RandomRange(this.halfWidth, config.Game.SCREEN_WIDTH - this.halfWidth);
+            this.alpha = 1;
+            this._activeTime = 0;
+            this.isActive = false;
+            this.position = new objects.Vector2(-1000, -1000);
             var randomSupply = Math.floor(util.Mathf.RandomRange(1, 10));
             console.log(randomSupply);
             if (randomSupply < 6) {
@@ -56,7 +72,6 @@ var objects;
             else if (randomSupply < 11) {
                 this.gotoAndPlay("bullet3");
             }
-            this.position = new objects.Vector2(randomX, -this.height);
         };
         return Supply;
     }(objects.GameObject));
